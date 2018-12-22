@@ -16,16 +16,29 @@
     <tr>
         <th>Name</th>
         <th>Description</th>
-        <th>Type</th>
+        <th>Category</th>
+        <th>Edit</th>
     </tr>
-
+    <!-- 1st th: - each (for loop) an iterator variable cheese :
+    dollar sign/curly brackets tells thymeleaf to look in the model
+    for the value of cheeses.-->
+    <!--2nd th: - A new li to access the text/data by referencing the iterator variable cheese-->
     <tr th:each="cheese : ${cheeses}">
         <td th:text="${cheese.name}"></td>
         <td th:text="${cheese.description}"></td>
-        <td th:text="${cheese.type.name}"></td>
+        <td th:text="${cheese.category.name}"></td>
+        <!--<td><a th:href="@{'/cheese/edit/' + ${cheese.id}}">Edit</a></td>-->
+        <!-- code to see what the database is doing -->
+        <td><a th:href="'/cheese/edit/' + ${cheese.id}" th:text="'edit: ' + ${cheese.id}"></a></td>
     </tr>
 
+
 </table>
+
+<p>
+    <a href="/cheese/add">Add</a> |
+    <a href="/cheese/remove">Remove</a>
+</p>
 
 </body>
 </html>
