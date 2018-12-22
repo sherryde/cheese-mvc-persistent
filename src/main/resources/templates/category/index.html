@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+
+<head th:replace="fragments :: head"></head>
+
+<body class="container body-content">
+
+<h1 th:text="${title}">Cheese Categories</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<br/>
+
+    <table class="table">
+
+        <ul th:each="category : ${categories}">
+            <li><a th:href="@{'/cheese/category/' + ${category.id}}" th:text="${category.name}"></a></li>
+        </ul>
+
+    </table>
+
+<p>
+    <a href="/category/add">Add Category</a>
+</p>
+
+</body>
+</html>
