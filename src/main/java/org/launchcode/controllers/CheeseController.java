@@ -106,9 +106,6 @@ public class CheeseController {
     // handler to display the cheese edit form
     @RequestMapping(value="edit/{cheeseId}", method = RequestMethod.GET)
     public String displayEditForm(Model model, @PathVariable int cheeseId){
-        // TODO look for cheeseId
-        // There was an unexpected error (type=Bad Request, status=400).
-        // Required int parameter 'cheeseId' is not present
         model.addAttribute("cheese", cheeseDao.findOne(cheeseId) );
         model.addAttribute("title", "Edit Cheese");
         model.addAttribute("categories", categoryDao.findAll());
@@ -117,18 +114,19 @@ public class CheeseController {
 
     // handler to process the edit form
     @RequestMapping(value = "edit", method = RequestMethod.POST)
-    public String processEditForm(Model model, @ModelAttribute @Valid Cheese cheese,
-                                  Errors errors, @RequestParam int cheeseId){
+    public String processEditForm(Model model, @ModelAttribute @Valid Cheese editCheese,
+                                  Errors errors, @RequestParam int id){
 
         if (errors.hasErrors()) {
-            model.addAttribute("title", "Edit Cheese" + cheese.getName());
+            model.addAttribute("title", "Edit Cheese");
             return "cheese/edit";  // or add
         }
-        Cheese cheese1 = cheeseDao.findOne(cheeseId);
-        cheese1.setName(cheese.getName());
-        cheese1.setDescription(cheese.getDescription());
 
-        cheeseDao.save(cheese1);
+        Cheese cheeseEdit = cheeseDao.findOne(id);
+        cheeseEdit.setName(editCheese.getName());
+        cheeseEdit.setDescription(editCheese.getDescription());
+
+
         return "redirect:";
     }
 

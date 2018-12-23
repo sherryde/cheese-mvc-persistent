@@ -69,3 +69,4 @@ that is a associated with this class Cheese.
 
 }
 
+// ManyToMany relationships - https://youtu.be/otuxIIbtznA?t=219

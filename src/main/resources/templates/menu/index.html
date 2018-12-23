@@ -2,27 +2,26 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 
     <head th:replace="fragments :: head"></head>
-    <body class="container">
-        <h1 th:text="${title}">Default Title</h1>
+
+    <body class="container body-content">
+
+        <h1 th:text="${title}">Cheese Menus</h1>
 
         <nav th:replace="fragments :: navigation"></nav>
 
-        <form method="post" th:object="${form}" action="/menu/add-item">
+        <br/>
 
-            <div class="form-group">
-                <label th:for="cheeseId">Cheese</label>
-                <select name="cheeseId">
-                    <option th:each="cheese : *{cheeses}"
-                            th:text="${cheese.name}"
-                            th:value="${cheese.id}"></option>
-                </select>
-                <span th:errors="*{cheeseId}" class="error"></span>
-            </div>
+        <table class="table">
 
-            <input type="hidden" name="menuId" th:value="*{menu.id}" />
-            <!-- parameter to be part of the post request but hidden-->
-            <input type="submit" value="Add Cheese to Menu" />
-        </form>
+            <ul th:each="menu : *{menus}">
+                <li><a th:href="@{'menu/view/' + ${menu.id}}" th:text="${menu.name}"></a></li>
+            </ul>
+
+        </table>
+
+        <p>
+            <a href="/menu/add">Add Menu</a>
+        </p>
 
     </body>
 </html>
